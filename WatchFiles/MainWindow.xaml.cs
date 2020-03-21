@@ -22,6 +22,10 @@ namespace WatchFiles
         {
             InitializeComponent();
             string dataDir = AppDomain.CurrentDomain.BaseDirectory + "Files\\";
+            if (!Directory.Exists(dataDir))
+            {
+                Directory.CreateDirectory(dataDir);
+            }
             fileTreeData = GetAllFiles(new DirectoryInfo(dataDir)).OrderByDescending(s => s.FileName).ToList();
             departmentTree.ItemsSource = fileTreeData;
         }
