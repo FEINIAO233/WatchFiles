@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# S3247: Duplicate casts should not be made
+dotnet_diagnostic.S3247.severity = none

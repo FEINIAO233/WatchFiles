@@ -1,0 +1,62 @@
+﻿<Window x:Class="WatchFiles.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="查看文件" Height="964.8" Width="1718.2" Background="#FFEEEEEE" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="166*"/>
+            <ColumnDefinition Width="1545*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl  
+            SelectedIndex="{Binding Model.TabIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            HorizontalAlignment="Stretch" 
+            SelectionChanged="TabControl_SelectionChanged"
+            VerticalAlignment="Stretch" Background="White" Margin="5,0,10.333,0.333" Grid.ColumnSpan="2">
+
+            <TabItem Header="文件浏览" BorderBrush="#FFE8E8E8">
+                <Grid ScrollViewer.CanContentScroll="True">
+                    <!--两行两列-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.ColumnSpan="2"  Orientation="Horizontal" Margin="0,2,0,2">
+
+                        <TextBlock VerticalAlignment="Center" FontSize="16">选中文件：</TextBlock>
+                        <TextBlock VerticalAlignment="Center" FontSize="16" Text="{Binding Model.SelectFileleName}"></TextBlock>
+                    </StackPanel>
+                    <TreeView Grid.Column="0" Grid.Row="1" x:Name="departmentTree" PreviewMouseUp="DepartmentTree_PreviewMouseUp">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Subitem}">
+                                <StackPanel  Orientation="Horizontal" Margin="0,2,0,2">
+                                    <Image  Source="{Binding Icon,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></Image>
+                                    <TextBlock VerticalAlignment="Center" FontSize="14" Text="{Binding FileName}" ToolTip="{Binding FilePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                                    <!--<TextBlock VerticalAlignment="Center" FontSize="14" Text="{Binding SubitemCount}" FontWeight="Bold"></TextBlock>-->
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+
+
+                    <!--照片-->
+                    <!--<Image Grid.Column="1" Grid.Row="1"  x:Name="MyImage"/>-->
+                    <RichTextBox Grid.Column="1" x:Name="ShowContent" HorizontalAlignment="Left" Height="857" VerticalAlignment="Top" Width="1409" IsReadOnly="True" Grid.Row="1" 
+                                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+                        <FlowDocument/>
+                    </RichTextBox>
+                </Grid>
+
+            </TabItem>
+
+        </TabControl>
+
+
+    </Grid>
+</Window>
